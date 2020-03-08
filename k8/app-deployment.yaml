@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - image: app
-        imagePullPolicy: ""
+        imagePullPolicy: IfNotPresent
         name: app
         ports:
         - containerPort: 5002
