@@ -1,0 +1,60 @@
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: app-6688f6796b
+  namespace: default
+  selfLink: /apis/apps/v1/namespaces/default/replicasets/app-6688f6796b
+  uid: be0f2abb-c6ff-4da3-9bb4-503b19666994
+  resourceVersion: '63252'
+  generation: 3
+  creationTimestamp: '2020-03-08T09:29:08Z'
+  labels:
+    io.kompose.service: app
+    pod-template-hash: 6688f6796b
+  annotations:
+    deployment.kubernetes.io/desired-replicas: '1'
+    deployment.kubernetes.io/max-replicas: '2'
+    deployment.kubernetes.io/revision: '1'
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: app
+      uid: 483e7e0a-dc48-4e3a-a964-aacf5998e8da
+      controller: true
+      blockOwnerDeletion: true
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      io.kompose.service: app
+      pod-template-hash: 6688f6796b
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: app
+        pod-template-hash: 6688f6796b
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+    spec:
+      containers:
+        - name: app
+          image: app
+          ports:
+            - containerPort: 5002
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+status:
+  replicas: 0
+  observedGeneration: 3

@@ -1,0 +1,101 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: app-c6c88c588-wdslb
+  generateName: app-c6c88c588-
+  namespace: default
+  selfLink: /api/v1/namespaces/default/pods/app-c6c88c588-wdslb
+  uid: d0e75c35-c84f-4929-9cd2-8442ac026212
+  resourceVersion: '63240'
+  creationTimestamp: '2020-03-08T16:24:57Z'
+  labels:
+    io.kompose.service: app
+    pod-template-hash: c6c88c588
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: app-c6c88c588
+      uid: fa30db9a-36ab-48a7-a384-8ae53f50f4a9
+      controller: true
+      blockOwnerDeletion: true
+spec:
+  volumes:
+    - name: default-token-8qs5l
+      secret:
+        secretName: default-token-8qs5l
+        defaultMode: 420
+  containers:
+    - name: app
+      image: app
+      ports:
+        - containerPort: 5002
+          protocol: TCP
+      resources: {}
+      volumeMounts:
+        - name: default-token-8qs5l
+          readOnly: true
+          mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+  terminationGracePeriodSeconds: 30
+  dnsPolicy: ClusterFirst
+  serviceAccountName: default
+  serviceAccount: default
+  nodeName: ip-172-31-47-241.ec2.internal
+  securityContext: {}
+  schedulerName: default-scheduler
+  tolerations:
+    - key: node.kubernetes.io/not-ready
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+    - key: node.kubernetes.io/unreachable
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+  priority: 0
+  enableServiceLinks: true
+status:
+  phase: Running
+  conditions:
+    - type: Initialized
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2020-03-08T16:24:57Z'
+    - type: Ready
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2020-03-08T16:24:59Z'
+    - type: ContainersReady
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2020-03-08T16:24:59Z'
+    - type: PodScheduled
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2020-03-08T16:24:57Z'
+  hostIP: 172.31.47.241
+  podIP: 172.17.0.9
+  podIPs:
+    - ip: 172.17.0.9
+  startTime: '2020-03-08T16:24:57Z'
+  containerStatuses:
+    - name: app
+      state:
+        running:
+          startedAt: '2020-03-08T16:24:58Z'
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: 'app:latest'
+      imageID: >-
+        docker://sha256:24245c0f7b74b3ad6303722cfe91b2fd7b5c0998c0cb3971d59382db2fafe3a0
+      containerID: >-
+        docker://b078e1a63acd24722d499d8fea0beb21985e4860d02cc4ab03089a2bbaaf87fb
+      started: true
+  qosClass: BestEffort

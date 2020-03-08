@@ -1,0 +1,36 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: db-claim0
+  namespace: default
+  selfLink: /api/v1/namespaces/default/persistentvolumeclaims/db-claim0
+  uid: 73009e80-c11c-422e-837e-771408f71811
+  resourceVersion: '6269'
+  creationTimestamp: '2020-03-08T09:16:23Z'
+  labels:
+    io.kompose.service: db-claim0
+  annotations:
+    control-plane.alpha.kubernetes.io/leader: >-
+      {"holderIdentity":"85eb1e70-6117-11ea-b1a1-0e804da24363","leaseDurationSeconds":15,"acquireTime":"2020-03-08T09:16:23Z","renewTime":"2020-03-08T09:16:53Z","leaderTransitions":0}
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"annotations":{},"creationTimestamp":null,"labels":{"io.kompose.service":"db-claim0"},"name":"db-claim0","namespace":"default"},"spec":{"accessModes":["ReadOnlyMany"],"resources":{"requests":{"storage":"100Mi"}}},"status":{}}
+    pv.kubernetes.io/bind-completed: 'yes'
+    pv.kubernetes.io/bound-by-controller: 'yes'
+    volume.beta.kubernetes.io/storage-provisioner: k8s.io/minikube-hostpath
+  finalizers:
+    - kubernetes.io/pvc-protection
+spec:
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 100Mi
+  volumeName: pvc-73009e80-c11c-422e-837e-771408f71811
+  storageClassName: standard
+  volumeMode: Filesystem
+status:
+  phase: Bound
+  accessModes:
+    - ReadOnlyMany
+  capacity:
+    storage: 100Mi

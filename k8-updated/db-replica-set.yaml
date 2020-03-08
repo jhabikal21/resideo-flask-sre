@@ -1,0 +1,75 @@
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: db-68c465cf59
+  namespace: default
+  selfLink: /apis/apps/v1/namespaces/default/replicasets/db-68c465cf59
+  uid: 0454a58c-2e07-468c-9593-768b30a3fc3a
+  resourceVersion: '6177'
+  generation: 1
+  creationTimestamp: '2020-03-08T09:16:15Z'
+  labels:
+    io.kompose.service: db
+    pod-template-hash: 68c465cf59
+  annotations:
+    deployment.kubernetes.io/desired-replicas: '1'
+    deployment.kubernetes.io/max-replicas: '1'
+    deployment.kubernetes.io/revision: '1'
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: db
+      uid: 4bb58f02-f98c-4e5a-85ec-a47811cee76d
+      controller: true
+      blockOwnerDeletion: true
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: db
+      pod-template-hash: 68c465cf59
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: db
+        pod-template-hash: 68c465cf59
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+    spec:
+      volumes:
+        - name: db-claim0
+          persistentVolumeClaim:
+            claimName: db-claim0
+            readOnly: true
+      containers:
+        - name: db
+          image: 'mysql:5.7'
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          resources: {}
+          volumeMounts:
+            - name: db-claim0
+              readOnly: true
+              mountPath: /docker-entrypoint-initdb.d/
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+status:
+  replicas: 1
+  fullyLabeledReplicas: 1
+  readyReplicas: 1
+  availableReplicas: 1
+  observedGeneration: 1

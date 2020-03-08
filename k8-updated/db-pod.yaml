@@ -1,0 +1,111 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: db-68c465cf59-r9gsj
+  generateName: db-68c465cf59-
+  namespace: default
+  selfLink: /api/v1/namespaces/default/pods/db-68c465cf59-r9gsj
+  uid: 3a388e9a-517a-4eb8-95bf-079a081195c0
+  resourceVersion: '6174'
+  creationTimestamp: '2020-03-08T09:16:15Z'
+  labels:
+    io.kompose.service: db
+    pod-template-hash: 68c465cf59
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: db-68c465cf59
+      uid: 0454a58c-2e07-468c-9593-768b30a3fc3a
+      controller: true
+      blockOwnerDeletion: true
+spec:
+  volumes:
+    - name: db-claim0
+      persistentVolumeClaim:
+        claimName: db-claim0
+        readOnly: true
+    - name: default-token-8qs5l
+      secret:
+        secretName: default-token-8qs5l
+        defaultMode: 420
+  containers:
+    - name: db
+      image: 'mysql:5.7'
+      ports:
+        - containerPort: 3306
+          protocol: TCP
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root
+      resources: {}
+      volumeMounts:
+        - name: db-claim0
+          readOnly: true
+          mountPath: /docker-entrypoint-initdb.d/
+        - name: default-token-8qs5l
+          readOnly: true
+          mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+  terminationGracePeriodSeconds: 30
+  dnsPolicy: ClusterFirst
+  serviceAccountName: default
+  serviceAccount: default
+  nodeName: ip-172-31-47-241.ec2.internal
+  securityContext: {}
+  schedulerName: default-scheduler
+  tolerations:
+    - key: node.kubernetes.io/not-ready
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+    - key: node.kubernetes.io/unreachable
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+  priority: 0
+  enableServiceLinks: true
+status:
+  phase: Running
+  conditions:
+    - type: Initialized
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2020-03-08T09:16:26Z'
+    - type: Ready
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2020-03-08T09:16:28Z'
+    - type: ContainersReady
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2020-03-08T09:16:28Z'
+    - type: PodScheduled
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2020-03-08T09:16:26Z'
+  hostIP: 172.31.47.241
+  podIP: 172.17.0.6
+  podIPs:
+    - ip: 172.17.0.6
+  startTime: '2020-03-08T09:16:26Z'
+  containerStatuses:
+    - name: db
+      state:
+        running:
+          startedAt: '2020-03-08T09:16:27Z'
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: 'mysql:5.7'
+      imageID: >-
+        docker-pullable://mysql@sha256:f4a5f5be3d94b4f4d3aef00fbc276ce7c08e62f2e1f28867d930deb73a314c58
+      containerID: >-
+        docker://68c843838bdcf2aaa839b14cb4aae2396c94fe491cae7f9043673610f2865679
+      started: true
+  qosClass: BestEffort

@@ -1,0 +1,86 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: db
+  namespace: default
+  selfLink: /apis/apps/v1/namespaces/default/deployments/db
+  uid: 4bb58f02-f98c-4e5a-85ec-a47811cee76d
+  resourceVersion: '6178'
+  generation: 1
+  creationTimestamp: '2020-03-08T09:16:15Z'
+  labels:
+    io.kompose.service: db
+  annotations:
+    deployment.kubernetes.io/revision: '1'
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"kompose.cmd":"kompose
+      convert","kompose.version":"1.21.0
+      (992df58d8)"},"creationTimestamp":null,"labels":{"io.kompose.service":"db"},"name":"db","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"io.kompose.service":"db"}},"strategy":{"type":"Recreate"},"template":{"metadata":{"annotations":{"kompose.cmd":"kompose
+      convert","kompose.version":"1.21.0
+      (992df58d8)"},"creationTimestamp":null,"labels":{"io.kompose.service":"db"}},"spec":{"containers":[{"env":[{"name":"MYSQL_ROOT_PASSWORD","value":"root"}],"image":"mysql:5.7","imagePullPolicy":"","name":"db","ports":[{"containerPort":3306}],"resources":{},"volumeMounts":[{"mountPath":"/docker-entrypoint-initdb.d/","name":"db-claim0","readOnly":true}]}],"restartPolicy":"Always","serviceAccountName":"","volumes":[{"name":"db-claim0","persistentVolumeClaim":{"claimName":"db-claim0","readOnly":true}}]}}},"status":{}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: db
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: db
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+    spec:
+      volumes:
+        - name: db-claim0
+          persistentVolumeClaim:
+            claimName: db-claim0
+            readOnly: true
+      containers:
+        - name: db
+          image: 'mysql:5.7'
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          resources: {}
+          volumeMounts:
+            - name: db-claim0
+              readOnly: true
+              mountPath: /docker-entrypoint-initdb.d/
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+status:
+  observedGeneration: 1
+  replicas: 1
+  updatedReplicas: 1
+  readyReplicas: 1
+  availableReplicas: 1
+  conditions:
+    - type: Available
+      status: 'True'
+      lastUpdateTime: '2020-03-08T09:16:28Z'
+      lastTransitionTime: '2020-03-08T09:16:28Z'
+      reason: MinimumReplicasAvailable
+      message: Deployment has minimum availability.
+    - type: Progressing
+      status: 'True'
+      lastUpdateTime: '2020-03-08T09:16:28Z'
+      lastTransitionTime: '2020-03-08T09:16:15Z'
+      reason: NewReplicaSetAvailable
+      message: ReplicaSet "db-68c465cf59" has successfully progressed.
