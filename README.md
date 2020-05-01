@@ -24,3 +24,5 @@ ports: Since I already have a running mysql instance on my host using this port,
 volumes: since we want the container to be initialized with our schema, we wire the directory containing our init.sql script to the entry point for this container, which by the image’s specification runs all .sql scripts in the given directory.
 
 mysql --host=db --port=3306 -u root -p
+
+Ref: https://code.tutsplus.com/tutorials/creating-a-web-app-from-scratch-using-python-flask-and-mysql--cms-22972
